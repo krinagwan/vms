@@ -7,9 +7,8 @@ on:
 
 jobs:
   terraforminit:
-    name: init-workflow
-    runs on : nitinrunner
+    name: initworkflow
+    runs-on: nitinrunner   # ✅ should be runs-on, not "runs on"
     steps:
-    - name: first step
-    run : echo first step
-
+      - name: first step
+        run: echo "first step"   # ✅ run must be indented under step
