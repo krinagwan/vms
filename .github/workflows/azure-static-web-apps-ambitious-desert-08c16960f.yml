@@ -8,7 +8,7 @@ on:
 jobs:
   terraforminit:
     name: initworkflow
-    runs-on: nitinrunner   # ✅ should be runs-on, not "runs on"
+    runs-on: selfhosted-nitin   # ✅ use label instead of runner name
     steps:
       - name: first step
-        run: echo "first step"   # ✅ run must be indented under step
+        run: echo "first step"
