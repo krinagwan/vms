@@ -8,7 +8,7 @@ on:
 jobs:
   terraforminit:
     name: initworkflow
-    runs-on: selfhosted-Apples-MacBook-Air  # ✅ your runner label
+    runs-on: macOS # ✅ your runner label
     
     permissions:
       contents: read
@@ -44,3 +44,4 @@ jobs:
         uses: comu2e/tfnotify-composite-action@1.0.4
         with:
           name: terraform-plan   # 🔹 required, can be any label
+
