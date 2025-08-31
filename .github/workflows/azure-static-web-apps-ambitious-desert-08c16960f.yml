@@ -8,7 +8,39 @@ on:
 jobs:
   terraforminit:
     name: initworkflow
-    runs-on: selfhosted-nitin   # ✅ use label instead of runner name
+    runs-on: selfhosted-Apples-MacBook-Air  # ✅ your runner label
+    
+    permissions:
+      contents: read
+      issues: write
+
     steps:
-      - name: first step
-        run: echo "first step"
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Terraform
+        uses: little-core-labs/install-terraform@v2.0.0
+        with:
+          version: 1.9.5   # 🔹 specify the Terraform version you want
+
+      - name: Azure Login
+        uses: azure/login@v2.3.0
+        with:
+          client-id: 912307b0-0182-498b-bc35-68923aba3eb0
+          tenant-id: df7d1ae3-5176-4f7e-914b-b0fbb8b85c9f
+          subscription-id: 74282b2c-f351-49d2-8fc1-345ec077bafb
+            
+          
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: env/dev   # 👈 fixed key
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+        working-directory: env/dev   # 👈 fixed key
+
+      - name: Run tfnotify
+        uses: comu2e/tfnotify-composite-action@1.0.4
+        with:
+          name: terraform-plan   # 🔹 required, can be any label
